@@ -49,6 +49,7 @@
   systemd:
     name: "{{ nova_services[item]['service_name'] }}"
     state: "restarted"
+    daemon_reload: yes
   register: nova_misc_restart
   with_items:
     - nova-api-metadata
