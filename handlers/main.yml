@@ -30,6 +30,8 @@
   systemd:
     name: "{{ nova_services['nova-conductor']['service_name'] }}"
     state: "restarted"
+    daemon_reload: yes
+
   register: nova_conductor_restart
   when:
     - "{{ nova_services['nova-conductor']['group'] in group_names }}"
@@ -39,6 +41,8 @@
   systemd:
     name: "{{ nova_services['nova-api-os-compute']['service_name'] }}"
     state: "restarted"
+    daemon_reload: yes
+
   register: nova_api_restart
   when:
     - "{{ nova_services['nova-api-os-compute']['group'] in group_names }}"
@@ -50,6 +54,7 @@
     name: "{{ nova_services[item]['service_name'] }}"
     state: "restarted"
     daemon_reload: yes
+
   register: nova_misc_restart
   with_items:
     - nova-api-metadata
